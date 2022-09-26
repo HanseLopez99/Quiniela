@@ -22,8 +22,14 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
-  <<: *default
-  database: Quiniela_development
+  adapter: postgresql
+  encoding: unicode
+  database: Rails.application.credentials.development.database
+  pool: 5
+  username: Rails.application.credentials.development.username
+  password: Rails.application.credentials.development.password
+  host: Rails.application.credentials.development.host
+  
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -56,8 +62,13 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: Quiniela_test
+  adapter: postgresql
+  encoding: unicode
+  database: Rails.application.credentials.test.database
+  pool: 5
+  username: Rails.application.credentials.test.username
+  password: Rails.application.credentials.test.password
+  host: Rails.application.credentials.test.host
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
