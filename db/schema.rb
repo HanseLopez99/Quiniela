@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_27_171140) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_27_183724) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_27_171140) do
     t.integer "score2"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "users_id"
+    t.index ["users_id"], name: "index_boards_on_users_id"
   end
 
   create_table "phases", force: :cascade do |t|
@@ -37,6 +39,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_27_171140) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "points"
+    t.bigint "users_id"
+    t.index ["users_id"], name: "index_players_on_users_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -57,4 +61,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_27_171140) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "boards", "users", column: "users_id"
+  add_foreign_key "players", "users", column: "users_id"
 end
