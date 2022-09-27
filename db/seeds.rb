@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+# load(Rails.root.join( 'db', 'seeders', "dev.rb"))
+# load(Rails.root.join( 'db', 'seeders', "test.rb"))
+# load(Rails.root.join( 'db', 'seeders', "#{Rails.env.downcase}.rb"))
+
+Dir[Rails.root.join('db/seeders/*.rb')].sort.each do |file|
+puts "Processing #{file.split('/').last}"
+require file
+end
