@@ -14,22 +14,20 @@
 # Configure Using Gemfile
 # gem "pg"
 #
-default: &default
+
+common: &common
+  pool: 30
+  host: 127.0.0.1
   adapter: postgresql
   encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  reconnect: false
 
 development:
-  adapter: postgresql
-  encoding: unicode
-  database: Rails.application.credentials.development.database
-  pool: 5
-  username: Rails.application.credentials.development.username
-  password: Rails.application.credentials.development.password
-  host: Rails.application.credentials.development.host
-  port: Rails.application.credentials.development.port
+  <<: *common
+  database: <%= Rails.application.credentials.db[:database] %>
+  username: <%= Rails.application.credentials.db[:username] %>
+  password: <%= Rails.application.credentials.db[:password] %>
+  port: <%= Rails.application.credentials.db.dig(:port) || 5432 %>
   
 
   # The specified database role being used to connect to postgres.
@@ -63,14 +61,12 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  adapter: postgresql
-  encoding: unicode
-  database: Rails.application.credentials.test.database
-  pool: 5
-  username: Rails.application.credentials.test.username
-  password: Rails.application.credentials.test.password
-  host: Rails.application.credentials.test.host
-  port: Rails.application.credentials.test.port
+  <<: *common
+  database: quiniela_test
+  username: <%= Rails.application.credentials.db[:username] %>
+  password: <%= Rails.application.credentials.db[:password] %>
+  port: <%= Rails.application.credentials.db[:port] %>
+
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -93,7 +89,7 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
+  <<: *common
   database: Quiniela_production
   username: Quiniela
   password: <%= ENV["QUINIELA_DATABASE_PASSWORD"] %>
