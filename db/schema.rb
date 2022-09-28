@@ -10,17 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_28_162415) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_28_164320) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "boards", force: :cascade do |t|
-    t.string "team1"
-    t.string "team2"
     t.integer "score1"
     t.integer "score2"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "team1"
+    t.integer "team2"
+    t.bigint "games_id"
+    t.bigint "users_id"
+    t.index ["games_id"], name: "index_boards_on_games_id"
+    t.index ["users_id"], name: "index_boards_on_users_id"
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.string "title"
+    t.datetime "game_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "phases_id"
+    t.index ["phases_id"], name: "index_games_on_phases_id"
   end
 
   create_table "phases", force: :cascade do |t|
@@ -50,4 +63,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_28_162415) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "boards", "games", column: "games_id"
+  add_foreign_key "boards", "teams", column: "team1"
+  add_foreign_key "boards", "teams", column: "team2"
+  add_foreign_key "boards", "users", column: "users_id"
+  add_foreign_key "games", "phases", column: "phases_id"
 end
