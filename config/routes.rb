@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :games
-  resources :players
   resources :phases
   resources :boards
   resources :teams
