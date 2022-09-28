@@ -18,4 +18,11 @@ class Board < ApplicationRecord
     end
   end
 
+  # Insert points into the user table
+  def insert_points
+    user = User.find(self.users_id)
+    user.points = user.points + self.user_points
+    user.save
+  end
+
 end

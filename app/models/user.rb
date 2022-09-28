@@ -13,4 +13,13 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :age , presence: true, numericality: { only_integer: true }
 
+  # Create callbacks for the user model
+
+  after_initialize :set_defaults
+
+  # Create a method to set the default points
+  def set_defaults
+    self.points ||= 0
+  end
+
 end
