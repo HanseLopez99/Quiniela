@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_30_144111) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_30_155427) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,8 +21,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_30_144111) do
     t.datetime "updated_at", null: false
     t.bigint "games_id"
     t.bigint "users_id"
-    t.integer "team1_id"
-    t.integer "team2_id"
     t.index ["games_id"], name: "index_boards_on_games_id"
     t.index ["users_id"], name: "index_boards_on_users_id"
   end
@@ -31,11 +29,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_30_144111) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "phases_id"
-    t.integer "winner_team_id"
-    t.integer "loser_team_id"
-    t.integer "winner_team_score"
-    t.integer "loser_team_score"
     t.datetime "starting_at"
+    t.integer "team1_id"
+    t.integer "team2_id"
+    t.integer "team1_score"
+    t.integer "team2_score"
     t.index ["phases_id"], name: "index_games_on_phases_id"
   end
 
@@ -68,10 +66,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_30_144111) do
   end
 
   add_foreign_key "boards", "games", column: "games_id"
-  add_foreign_key "boards", "teams", column: "team1_id"
-  add_foreign_key "boards", "teams", column: "team2_id"
   add_foreign_key "boards", "users", column: "users_id"
   add_foreign_key "games", "phases", column: "phases_id"
-  add_foreign_key "games", "teams", column: "loser_team_id"
-  add_foreign_key "games", "teams", column: "winner_team_id"
+  add_foreign_key "games", "teams", column: "team1_id"
+  add_foreign_key "games", "teams", column: "team2_id"
 end
