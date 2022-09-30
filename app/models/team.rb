@@ -1,7 +1,8 @@
 class Team < ApplicationRecord
 
   # Create associations
-  has_many :games
+  has_many :games, foreign_key: "team1_id"
+  has_many :games, foreign_key: "team2_id"
 
   # Create validations for the team model
   validates :id, presence: true, uniqueness: true, numericality: { only_integer: true }

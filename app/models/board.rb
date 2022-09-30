@@ -4,10 +4,10 @@ class Board < ApplicationRecord
   belongs_to :user
 
   # Create validations for the board model
-  validates :team1, presence: true, numericality: { only_integer: true }
-  validates :team2, presence: true, numericality: { only_integer: true }
+  validates :score1, presence: true, numericality: { only_integer: true }
+  validates :score2, presence: true, numericality: { only_integer: true }
   validates :games_id, presence: true, numericality: { only_integer: true }
-  validates :users_id, presence: true, uniqueness: true, numericality: { only_integer: true }
+  validates :users_id, presence: true, numericality: { only_integer: true }
 
   # Create callbacks to manage user points
   before_save :set_user_points
