@@ -1,4 +1,7 @@
 class Board < ApplicationRecord
+  # Create associations
+  belongs_to :game
+  belongs_to :user
 
   # Create validations for the board model
   validates :team1, presence: true, numericality: { only_integer: true }

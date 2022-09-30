@@ -1,6 +1,9 @@
 class Game < ApplicationRecord
   # Create associations
-  belongs_to :phase, 
+  belongs_to :phase,
+  belongs_to :winner_team_id, class_name: "Team"
+  belongs_to :loser_team_id, class_name: "Team"
+  has_many :boards
 
   # Create validations for the game model
   validates :game_winner, presence: true, numericality: { only_integer: true }
