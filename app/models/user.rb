@@ -16,6 +16,8 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :age , presence: true, numericality: { only_integer: true }
 
+  # Create enums for the user model
+
   # Create callbacks for the user model
 
   after_initialize :set_defaults

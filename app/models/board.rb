@@ -9,6 +9,16 @@ class Board < ApplicationRecord
   validates :games_id, presence: true, numericality: { only_integer: true }
   validates :users_id, presence: true, numericality: { only_integer: true }
 
+  # Create enums for the board model
+
+  # status true if the two scores are filled
+  enum status: { 
+    not_filled: 0,
+    filled: 1
+  }
+
+  scope :by_user, -> (user_id) { where(users_id: user_id) }
+
   # Create callbacks to manage user points
   before_save :set_user_points
 

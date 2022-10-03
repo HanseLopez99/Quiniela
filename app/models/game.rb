@@ -13,6 +13,12 @@ class Game < ApplicationRecord
   validates :team2_score, presence: true, numericality: { only_integer: true }
   validates :starting_at, presence: true
 
+  # Create enums or scopes for the team model
+  enum status: {
+    started: :started,
+    finished: :finished
+  }
+
   # Crate callbacks for the game model
   before_save :set_game_winner
   before_save :set_game_loser
