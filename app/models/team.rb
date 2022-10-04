@@ -5,7 +5,6 @@ class Team < ApplicationRecord
   has_many :games, foreign_key: "team2_id"
 
   # Create validations for the team model
-  validates :id, presence: true, uniqueness: true, numericality: { only_integer: true }
   validates :name, presence: true, uniqueness: true
 
   # Create enums or scopes for the team model

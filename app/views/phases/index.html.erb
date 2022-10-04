@@ -1,14 +1,21 @@
 <p style="color: green"><%= notice %></p>
 
+<div>
+  <%= link_to "Back to Main Menu", root_path %>
+</div>
+
 <h1>Phases</h1>
 
 <div id="phases">
+  <hr>
   <% @phases.each do |phase| %>
     <%= render phase %>
     <p>
       <%= link_to "Show this phase", phase %>
     </p>
+    <hr>
   <% end %>
 </div>
 
 <%= link_to "New phase", new_phase_path %>
+<hr>

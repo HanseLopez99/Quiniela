@@ -1,14 +1,21 @@
 <p style="color: green"><%= notice %></p>
 
+<div>
+  <%= link_to "Back to Main Menu", root_path %>
+</div>
+
 <h1>Teams</h1>
 
 <div id="teams">
+  <hr>
   <% @teams.each do |team| %>
     <%= render team %>
     <p>
       <%= link_to "Show this team", team %>
     </p>
+    <hr>
   <% end %>
 </div>
 
 <%= link_to "New team", new_team_path %>
+<hr>
