@@ -13,6 +13,8 @@ class GamesController < ApplicationController
   # GET /games/new
   def new
     @game = Game.new
+    @teams = Team.all
+    @phases = Phase.all
   end
 
   # GET /games/1/edit
@@ -22,6 +24,8 @@ class GamesController < ApplicationController
   # POST /games or /games.json
   def create
     @game = Game.new(game_params)
+    @teams = Team.all
+    @phases = Phase.all
 
     respond_to do |format|
       if @game.save
@@ -65,6 +69,6 @@ class GamesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def game_params
-      params.require(:game).permit(:title, :game_date)
+      params.require(:game).permit(:team1_id, :team2_id, :phases_id, :starting_at, :team1_score, :team2_score, :status)
     end
 end
