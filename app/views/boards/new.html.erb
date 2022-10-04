@@ -1,7 +1,35 @@
 <h1>New board</h1>
 
-<%= render "form", board: @board %>
+<%= form_with model: @board, url: boards_path(@board), method: :post do |frm| %>
 
+  <div class="field">
+    <%= frm.label :users_id %><br />
+    <%= frm.select :users_id, @users.map { |user| [user.first_name, user.id]}, {}, class: "form-control" %>
+  </div>
+  <br>
+
+  <div class="field">
+    <%= frm.label :games_id %><br />
+    <%= frm.select :games_id, @games.map { |game| [game.title, game.id]}, {}, class: "form-control" %>
+  </div>
+  <br>
+
+  <div class="field">
+    <%= frm.label :score1 %><br />
+    <%= frm.number_field :score1, in: 1..25, step: 1 %>
+  </div>
+  <br>
+
+  <div class="field">
+    <%= frm.label :score2 %><br />
+    <%= frm.number_field :score2, in: 1..25, step: 1 %>
+  </div>
+  <br>
+
+  <%= frm.submit %>
+  <br>
+
+<% end %>
 <br>
 
 <div>

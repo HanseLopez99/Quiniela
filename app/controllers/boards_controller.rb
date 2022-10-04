@@ -1,5 +1,5 @@
 class BoardsController < ApplicationController
-  before_action :set_board, only: %i[ show edit update destroy ]
+  skip_before_action :verify_authenticity_token
 
   # GET /boards or /boards.json
   def index
@@ -13,6 +13,9 @@ class BoardsController < ApplicationController
   # GET /boards/new
   def new
     @board = Board.new
+    @users = User.all
+    @games = Game.all
+    @teams = Team.all
   end
 
   # GET /boards/1/edit
@@ -22,8 +25,16 @@ class BoardsController < ApplicationController
   # POST /boards or /boards.json
   def create
     @board = Board.new(board_params)
+    @users = User.all
+    @games = Game.all
+    @teams = Team.all
 
     respond_to do |format|
+      
+      unless board_params[:team1_score].blank? || board_params[:team2_score].blank?
+        UpdatePointsJob.perform_now
+      end
+
       if @board.save
         format.html { redirect_to board_url(@board), notice: "Board was successfully created." }
         format.json { render :show, status: :created, location: @board }
@@ -37,6 +48,11 @@ class BoardsController < ApplicationController
   # PATCH/PUT /boards/1 or /boards/1.json
   def update
     respond_to do |format|
+
+      unless board_params[:team1_score].blank? || board_params[:team2_score].blank?
+        UpdatePointsJob.perform_now
+      end
+
       if @board.update(board_params)
         format.html { redirect_to board_url(@board), notice: "Board was successfully updated." }
         format.json { render :show, status: :ok, location: @board }
@@ -65,6 +81,6 @@ class BoardsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def board_params
-      params.require(:board).permit(:team1, :team2, :score1, :score2)
+      params.require(:board).permit(:users_id, :games_id, :score1, :score2)
     end
 end
