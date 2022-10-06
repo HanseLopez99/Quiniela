@@ -2,18 +2,33 @@
 
 <p>Welcome to your favorite Quiniela App</p>
 
-<div>
-  <%= link_to 'Phases', phases_path %>
-</div>
+<% if current_user %>
+  <p>Hi <%= "#{current_user.first_name}"+" "+"#{current_user.last_name}" %></p>
+  <p> You are a [<%= current_user.role %>] </p>
 
-<div>
-  <%= link_to 'Teams', teams_path %>
-</div>
+  <% if current_user.admin? %>
+    You can modify the structure of the Quiniela
+    <br>
+    <div>
+      <%= link_to 'Phases', phases_path %>
+    </div>
 
-<div>
-  <%= link_to 'Games', games_path %>
-</div>
+    <div>
+      <%= link_to 'Teams', teams_path %>
+    </div>
 
-<div>
-  <%= link_to 'Board', boards_path %>
-</div>
+    <div>
+      <%= link_to 'Games', games_path %>
+    </div>
+  <% end %>
+  <% unless current_user.admin? %>
+    Here you can start playing the Quiniela
+    
+    <div>
+      <br>
+      <%= link_to 'Board', boards_path %>
+    </div>
+  <% end %>
+<% end %>
+
+
