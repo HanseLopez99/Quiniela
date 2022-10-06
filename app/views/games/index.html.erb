@@ -16,7 +16,6 @@
         <th>Phase</th>
         <th>Score1</th>
         <th>Score2</th>
-        <th>Status</th>
         <th></th>
         <th></th>
       </tr>
@@ -31,7 +30,6 @@
           <td><%= Phase.find_by(id:game.phases_id).description %></td>
           <td><%= game.team1_score %></td>
           <td><%= game.team2_score %></td>
-          <td><%= game.status %></td>
           <td> <button><%= link_to "Edit", edit_game_path(game) %></button></td>
           <td> <%= button_to "Delete", game, method: :delete %></td>
         </tr>

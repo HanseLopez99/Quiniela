@@ -26,8 +26,10 @@
           <td><%= User.find_by(id:board.users_id).first_name %></td>
           <td><%= board.score1 %></td>
           <td><%= board.score2 %></td>
-          <td> <button><%= link_to "Edit", edit_board_path(board) %></button></td>
-          <td> <%= button_to "Delete", board, method: :delete %></td>
+          <% if current_user == User.find_by(id:board.users_id) %>
+            <td> <button><%= link_to "Edit", edit_board_path(board) %></button></td>
+            <td> <%= button_to "Delete", board, method: :delete %></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>

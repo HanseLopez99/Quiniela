@@ -8,6 +8,10 @@ class BoardsController < ApplicationController
 
   # GET /boards/1 or /boards/1.json
   def show
+    @users = User.order(points: :desc)
+    @games = Game.all
+    @teams = Team.all
+    @boards = Board.all
   end
 
   # GET /boards/new
