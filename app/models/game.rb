@@ -11,7 +11,6 @@ class Game < ApplicationRecord
   before_save :check_is_started
 
 
-  # Create a method to set the game winner
   def check_is_started
     if self.starting_at < Time.now
       self.status = "started"

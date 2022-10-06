@@ -19,6 +19,9 @@ class GamesController < ApplicationController
 
   # GET /games/1/edit
   def edit
+    @game = Game.find(params[:id])
+    @teams = Team.all
+    @phases = Phase.all
   end
 
   # POST /games or /games.json

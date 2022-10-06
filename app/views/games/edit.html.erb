@@ -1,10 +1,28 @@
 <h1>Edit game</h1>
 
-<%= form_with model: @game, url: games_path(@game), method: :post do |frm| %>
+<%= form_with model: @game do |frm| %>
   
   <div class="field"> 
     <%= frm.label :starting_at %>
     <%= frm.datetime_field :starting_at %>
+  </div>
+  <br>
+
+  <div class="field">
+    <%= frm.label :team1_id %><br />
+    <%= frm.select :team1_id, @teams.map { |team| [team.name, team.id]}, {}, class: "form-control" %>
+  </div>
+  <br>
+
+  <div class="field">
+    <%= frm.label :team2_id %><br />
+    <%= frm.select :team2_id, @teams.map { |team| [team.name, team.id]}, {}, class: "form-control" %>
+  </div>
+  <br>
+
+  <div class="field">
+    <%= frm.label :phases_id %><br />
+    <%= frm.select :phases_id, @phases.map { |phase| [phase.description, phase.id]}, {}, class: "form-control" %>
   </div>
   <br>
 
