@@ -4,7 +4,9 @@
 
   <div class="field">
     <%= frm.label :users_id %><br />
-    <%= frm.select :users_id, @users.map { |user| [user.first_name, user.id]}, {}, class: "form-control" %>
+    <%# Only only show the current user first_name and submin the current user id %>
+    <%= frm.text_field :users_id, value: current_user.first_name, readonly: true %>
+    <%= frm.hidden_field :users_id, value: current_user.id %>
   </div>
   <br>
 
