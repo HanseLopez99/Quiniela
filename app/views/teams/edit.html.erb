@@ -1,7 +1,17 @@
 <h1>Editing team</h1>
 
-<%= render "form", team: @team %>
+<%= form_with model: @team do |frm| %>
+  
+  <div class="field"> 
+    <%= frm.label :name %>
+    <%= frm.text_field :name %>
+  </div>
+  <br>
 
+  <%= frm.submit %>
+  <br>
+
+<% end %>
 <br>
 
 <div>

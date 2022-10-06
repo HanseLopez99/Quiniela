@@ -7,15 +7,27 @@
 <h1>Teams</h1>
 
 <div id="teams">
-  <hr>
-  <% @teams.each do |team| %>
-    <%= render team %>
-    <p>
-      <%= link_to "Show this team", team %>
-    </p>
-    <hr>
-  <% end %>
+  <table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Name</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @teams.each do |team| %>
+        <tr>
+          <td><%= team.name %></td>
+          <td> <button><%= link_to "Edit", edit_team_path(team) %></button></td>
+          <td> <%= button_to "Delete", team, method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
+<br>
 <%= link_to "New team", new_team_path %>
 <hr>
