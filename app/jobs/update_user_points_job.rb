@@ -1,11 +1,11 @@
 require 'rake'
 
 class UpdateUserPointsJob < ApplicationJob
-  # run rake task to update user points "calculate_points"
+  # run rake task to update user points "refresh_points"
   queue_as :default
 
   def perform(*args)
     Quiniela::Application.load_tasks
-    Rake::Task['calculate_points'].invoke
+    Rake::Task['refresh_points'].invoke
   end
 end

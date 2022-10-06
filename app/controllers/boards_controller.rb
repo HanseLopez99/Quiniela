@@ -51,9 +51,8 @@ class BoardsController < ApplicationController
   # PATCH/PUT /boards/1 or /boards/1.json
   def update
     respond_to do |format|
-
-      unless board_params[:team1_score].blank? || board_params[:team2_score].blank?
-        UpdatePointsJob.perform_now
+      unless board_params[:score1].blank? || board_params[:score2].blank?
+        UpdateUserPointsJob.perform_now
       end
 
       puts board_url(@board)
