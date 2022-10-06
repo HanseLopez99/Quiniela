@@ -1,5 +1,5 @@
 class BoardsController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  before_action :set_board, only: %i[ show edit update destroy ]
 
   # GET /boards or /boards.json
   def index
@@ -20,6 +20,10 @@ class BoardsController < ApplicationController
 
   # GET /boards/1/edit
   def edit
+    @board = Board.find(params[:id])
+    @users = User.all
+    @games = Game.all
+    @teams = Team.all
   end
 
   # POST /boards or /boards.json
@@ -29,10 +33,9 @@ class BoardsController < ApplicationController
     @games = Game.all
     @teams = Team.all
 
-    respond_to do |format|
-      
-      unless board_params[:team1_score].blank? || board_params[:team2_score].blank?
-        UpdatePointsJob.perform_now
+    respond_to do |format|      
+      unless board_params[:score1].blank? || board_params[:score2].blank?
+        UpdateUserPointsJob.perform_now
       end
 
       if @board.save
@@ -53,6 +56,7 @@ class BoardsController < ApplicationController
         UpdatePointsJob.perform_now
       end
 
+      puts board_url(@board)
       if @board.update(board_params)
         format.html { redirect_to board_url(@board), notice: "Board was successfully updated." }
         format.json { render :show, status: :ok, location: @board }

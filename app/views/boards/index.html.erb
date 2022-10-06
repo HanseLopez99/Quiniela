@@ -7,12 +7,31 @@
 <h1>Boards</h1>
 
 <div id="boards">
-  <% @boards.each do |board| %>
-    <%= render board %>
-    <p>
-      <%= link_to "Show this board", board %>
-    </p>
-  <% end %>
-</div>
+  <table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Game</th>
+        <th>User</th>
+        <th>Score1</th>
+        <th>Score2</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
 
+    <tbody>
+      <% @boards.each do |board| %>
+        <tr>
+          <td><%= Game.find_by(id:board.games_id).title %></td>
+          <td><%= User.find_by(id:board.users_id).first_name %></td>
+          <td><%= board.score1 %></td>
+          <td><%= board.score2 %></td>
+          <td> <button><%= link_to "Edit", edit_board_path(board) %></button></td>
+          <td> <%= button_to "Delete", board, method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<br>
 <%= link_to "New board", new_board_path %>
