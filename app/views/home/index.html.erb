@@ -23,7 +23,10 @@
   <% end %>
   <% unless current_user.admin? %>
     Here you can start playing the Quiniela
-    
+    <div>
+      <br>
+      <%= link_to 'Scoreboard', scoreboard_path %>
+    </div>
     <div>
       <br>
       <%= link_to 'Board', boards_path %>

@@ -1,0 +1,27 @@
+<div>
+  <%= link_to "Back to Main Menu", root_path %>
+</div>
+
+<h1> Scoreboard </h1>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Player</th>
+        <th>Points</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.first_name %></td>
+          <td><%= user.points %></td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>
+
+

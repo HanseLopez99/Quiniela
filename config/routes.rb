@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   resources :phases
   resources :boards
   resources :teams
+  
+  # Route for scoreboard page
+  get 'scoreboard', to: 'scoreboard#show'
+
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # devise_scope :user do
