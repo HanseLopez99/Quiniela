@@ -7,6 +7,8 @@ class Team < ApplicationRecord
   # Create validations for the team model
   validates :name, presence: true, uniqueness: true
 
+  has_one_attached :logo
+
   # Create enums or scopes for the team model
 
   enum status: {
