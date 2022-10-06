@@ -1,7 +1,17 @@
 <h1>Editing phase</h1>
 
-<%= render "form", phase: @phase %>
+<%= form_with model: @phase do |frm| %>
+  
+  <div class="field"> 
+    <%= frm.label :description %>
+    <%= frm.text_field :description %>
+  </div>
+  <br>
 
+  <%= frm.submit %>
+  <br>
+
+<% end %>
 <br>
 
 <div>

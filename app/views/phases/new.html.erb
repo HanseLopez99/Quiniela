@@ -1,7 +1,17 @@
 <h1>New phase</h1>
 
-<%= render "form", phase: @phase %>
+<%= form_with model: @phase, url: phases_path(@phase), method: :post do |frm| %>
+  
+  <div class="field"> 
+    <%= frm.label :description %>
+    <%= frm.text_field :description %>
+  </div>
+  <br>
 
+  <%= frm.submit %>
+  <br>
+
+<% end %>
 <br>
 
 <div>
