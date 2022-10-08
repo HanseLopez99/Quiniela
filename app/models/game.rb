@@ -1,4 +1,9 @@
 class Game < ApplicationRecord
+  # Create associations
+  has_many :boards
+  belongs_to :phase
+  # belongs_to :team1_id, class_name: "Team"
+  # belongs_to :team2_id, class_name: "Team"
 
   # Create enums or scopes for the team model
   enum status: {

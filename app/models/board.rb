@@ -1,7 +1,7 @@
 class Board < ApplicationRecord
   # Create associations
-  # belongs_to :game
-  # belongs_to :user
+  belongs_to :game
+  belongs_to :user
 
   # Create validations for the board model
   validates :score1, numericality: { only_integer: true }
