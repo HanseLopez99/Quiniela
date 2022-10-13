@@ -7,8 +7,8 @@ class Game < ApplicationRecord
 
   # Create enums or scopes for the team model
   enum status: {
-    started: :started,
-    unstarted: :unstarted
+    started: "started",
+    unstarted: "unstarted"
   }
 
   # Crate callbacks for the game model
