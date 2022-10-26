@@ -1,4 +1,4 @@
-class Api::TeamsController < ApplicationController
+class Api::TeamsController < Api::ApplicationController
   before_action :set_team, only: %i[ show edit update destroy ]
 
   # GET /teams or /teams.json
@@ -6,7 +6,6 @@ class Api::TeamsController < ApplicationController
     @teams = Team.all
     
     respond_to do |format|
-      format.html
       format.json { render json: @teams }
       format.xml { render xml: @teams }
     end
@@ -17,7 +16,6 @@ class Api::TeamsController < ApplicationController
     @team = Team.find(params[:id])
 
     respond_to do |format|
-      format.html
       format.json { render json: @team }
       format.xml { render xml: @team }
     end
@@ -26,6 +24,11 @@ class Api::TeamsController < ApplicationController
   # GET /teams/new
   def new
     @team = Team.new
+
+    respond_to do |format|
+      format.json { render json: @team }
+      format.xml { render xml: @team }
+    end
   end
 
   # GET /teams/1/edit
@@ -38,8 +41,8 @@ class Api::TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.save
-        format.html { redirect_to team_url(@team), notice: "Team was successfully created." }
-        format.json { render :show, status: :created, location: @team }
+        format.json { render :json => {:message => "Team created successfully"}, :status => 200 }
+        format.xml { render :xml => {:message => "Team created successfully"}, :status => 200 }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @team.errors, status: :unprocessable_entity }
@@ -51,8 +54,8 @@ class Api::TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to team_url(@team), notice: "Team was successfully updated." }
-        format.json { render :show, status: :ok, location: @team }
+        format.json { render :json => {:message => "Team updated successfully"}, :status => 200 }
+        format.xml { render :xml => {:message => "Team updated successfully"}, :status => 200 }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @team.errors, status: :unprocessable_entity }
@@ -65,8 +68,8 @@ class Api::TeamsController < ApplicationController
     @team.destroy
 
     respond_to do |format|
-      format.html { redirect_to teams_url, notice: "Team was successfully destroyed." }
-      format.json { head :no_content }
+      format.json { render :json => {:message => "Team deleted successfully"}, :status => 200 }
+      format.xml { render :xml => {:message => "Team deleted successfully"}, :status => 200 }
     end
   end
 
