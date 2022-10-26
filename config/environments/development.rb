@@ -65,6 +65,8 @@ Rails.application.configure do
   # Store files locally.
   config.active_storage.service = :local
 
+  config.hosts << /[a-z0-9-.]+\.ngrok\.io/
+
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
