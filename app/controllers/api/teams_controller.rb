@@ -1,5 +1,6 @@
 class Api::TeamsController < Api::ApplicationController
   before_action :set_team, only: %i[ show edit update destroy ]
+  before_action :validate_token
 
   # GET /teams or /teams.json
   def index
