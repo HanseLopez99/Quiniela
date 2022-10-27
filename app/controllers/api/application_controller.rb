@@ -18,7 +18,7 @@ class Api::ApplicationController < ActionController::API
 
     # Return the token
     respond_to do |format|
-      format.json { render :json => { message: "Token generated", token: token } }
+      format.json { render :json => { message: "Token generated", iat: Time.now, exp: Time.now + 30, token: token }, status: 200 }
       format.xml { render :xml => { message: "Token generated", token: token } }
     end
   end
